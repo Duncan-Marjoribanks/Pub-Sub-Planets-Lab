@@ -14,7 +14,7 @@ SolarSystem.prototype.bindEvents = function(){
 
 SolarSystem.prototype.publishPlanetDetail = function(planetId){
   console.log(planetId);
-  const selectedPlanet = findPlanet(planetId);;
+  const selectedPlanet = this.findPlanet(planetId);;
   PubSub.publish("SolarSystem:selected-planet-ready", selectedPlanet)
 };
 
