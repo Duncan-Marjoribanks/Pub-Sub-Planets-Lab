@@ -6,15 +6,26 @@ const SolarSystem = function(planets) {
 
 SolarSystem.prototype.bindEvents = function(){
   PubSub.subscribe("SelectView:click", (evt) => {
-    const selectedIndex = evt.detail;
-    console.log(evt);
-    this.publishPlanetDetail(selectedIndex);
+    const selectedPlanet = evt.detail;
+    console.dir(evt);
+    this.publishPlanetDetail(selectedPlanet);
   });
 };
 
-SolarSystem.prototype.publishPlanetDetail = function(planetIndex){
-  const selectedPlanet = this.planets[planetIndex];
+SolarSystem.prototype.publishPlanetDetail = function(planetId){
+  console.log(planetId);
+  const selectedPlanet = findPlanet(planetId);;
   PubSub.publish("SolarSystem:selected-planet-ready", selectedPlanet)
 };
+
+SolarSystem.prototype.findPlanet = function(planetId){
+  for(planet of this.planets){
+    if(planet.name == planetId){
+      return planet;
+    }
+};
+}
+
+
 
 module.exports = SolarSystem;
